@@ -1,1 +1,24 @@
-main = rule { true }
+# Allowed availability zones
+allowed_zones = [
+  "us-east-1a",
+  "us-east-1b",
+  "us-east-1c",
+  "us-east-1d",
+  "us-east-1e",
+  "us-east-1f",
+]
+
+# Rule to restrict availability zones and region
+region_allowed = rule {
+    all aws_instances as _, instances {
+      all instances as index, r {
+         r.applied.availability_zone in allowed_zones
+      }
+    }
+}
+
+# Main rule that requires other rules to be true
+main = rule {
+  (region_allowed) else true
+}
+#main = rule { true }
