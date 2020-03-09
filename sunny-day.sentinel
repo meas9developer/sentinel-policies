@@ -6,6 +6,7 @@ allowed_zones = [
   "us-east-1d",
   "us-east-1e",
   "us-east-1f",
+  "ap-southeast-2",
 ]
 
 # Rule to restrict availability zones and region
