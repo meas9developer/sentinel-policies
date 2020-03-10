@@ -23,7 +23,7 @@ import "tfplan"
               	             }
               	             }
 
-                 main = rule {
-     	               (cidr_denied) else true
-                 }
-#main =  rule { true }
+#                 main = rule {
+#     	               (cidr_denied) else true
+#                 }
+main =  rule { true }
