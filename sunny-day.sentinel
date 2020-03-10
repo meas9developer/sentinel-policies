@@ -10,20 +10,15 @@ import "tfplan"
 
                          # Allowed availability zones
                          allowed_zones = [
-                           "us-east-1a",
-                           "us-east-1b",
-                           "us-east-1c",
-                           "us-east-1d",
-                           "us-east-1e",
-                           "us-east-1f",
+                           "0.0.0.0/0",
                          ]
 
-                                     aws_vpcs = get_vpc_instances()
+                                     vpcs = get_vpc_instances()
 
                                      region_allowed = rule {
-                                         all aws_vpcs as _, instances {
+                                         all vpcs as _, instances {
                                             all instances as index, r {
-                                       	   r.applied.availability_zone in allowed_zones
+                                       	   r.applied.cidr_block in allowed_zones
                                             	         }
                                              	             }
                                              	             }
