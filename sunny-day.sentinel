@@ -9,22 +9,22 @@ import "tfplan"
                          }
 
                          # Allowed availability zones
-                         allowed_zones = [
+                         denied_cidr = [
                            "0.0.0.0/0",
                          ]
 
                                      vpcs = get_vpc_instances()
 
-                                     region_allowed = rule {
+                                     cidr_denied = rule {
                                          all vpcs as _, instances {
                                             all instances as index, r {
-                                       	   r.applied.cidr_block in allowed_zones
+                                       	   r.applied.cidr_block in denied_cidr
                                             	         }
                                              	             }
                                              	             }
 
                                                  	             # Main rule that requires other rules to be true
                                                  	             main = rule {
-                                                 	               (region_allowed) else true
+                                                 	               (cidr_denied) else false
                                                  	               }
 #main = rule { true }
