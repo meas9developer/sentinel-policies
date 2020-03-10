@@ -15,16 +15,15 @@ import "tfplan"
 
                                      vpcs = get_vpc_instances()
 
-                                     cidr_denied = rule {
-                                         all vpcs as _, instances {
-                                            all instances as index, r {
-                                       	   r.applied.cidr_block in denied_cidr
-                                            	         }
-                                             	             }
-                                             	             }
+                                cidr_denied = rule {
+                                all vpcs as _, instances {
+                                   all instances as index, r {
+                              	   r.applied.cidr_block in denied_cidr
+                      	         }
+              	             }
+              	             }
 
-                                                 	             # Main rule that requires other rules to be true
-                                                 	             main = rule {
-                                                 	               (cidr_denied) else false
-                                                 	               }
-#main = rule { true }
+                 main = rule {
+     	               (cidr_denied) else true
+                 }
+#main =  rule { true }
